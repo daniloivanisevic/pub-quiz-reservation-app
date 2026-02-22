@@ -1,15 +1,13 @@
 #!/bin/sh
 set -e
 
-echo "Waiting for database..."
-until nc -z "$DB_HOST" "$DB_PORT"; do
-  sleep 1
+echo "Waiting for DB..."
+while ! nc -z db 5432; do
+  sleep 0.5
 done
-echo "Database is up!"
 
+echo "Applying migrations..."
 python manage.py migrate --noinput
 
-
-# python manage.py collectstatic --noinput
-
-python manage.py runserver 0.0.0.0:8000
+echo "Starting Django..."
+exec python manage.py runserver 0.0.0.0:8000
