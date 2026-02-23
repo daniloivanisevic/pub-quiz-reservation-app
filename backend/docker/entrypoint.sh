@@ -2,12 +2,23 @@
 set -e
 
 echo "Waiting for DB..."
-while ! nc -z db 5432; do
-  sleep 0.5
+
+DB_HOST="${DB_HOST:-db}"
+DB_PORT="${DB_PORT:-5432}"
+
+# čekaj dok baza ne postane dostupna
+until nc -z "$DB_HOST" "$DB_PORT"; do
+  echo "DB not ready at ${DB_HOST}:${DB_PORT} - sleeping..."
+  sleep 1
 done
 
-echo "Applying migrations..."
+echo "DB is up!"
+
+# migracije
 python manage.py migrate --noinput
 
-echo "Starting Django..."
-exec python manage.py runserver 0.0.0.0:8000
+# static fajlovi (WhiteNoise)
+python manage.py collectstatic --noinput || true
+
+# pokretanje aplikacije (production)
+exec gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8000}
