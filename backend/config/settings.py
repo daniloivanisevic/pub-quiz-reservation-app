@@ -120,6 +120,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://pab-kviz-frontend.onrender.com",
 ]
 cors_origins = os.getenv("CORS_ALLOWED_ORIGINS", "")
 if cors_origins:
