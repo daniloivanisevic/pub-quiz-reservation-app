@@ -30,3 +30,6 @@ frontend/pnpm-debug.log*
 
 # OS junk
 .DS_Store
+.env
+backend/.env
+frontend/.env*
