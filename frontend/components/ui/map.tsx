@@ -104,7 +104,6 @@ export default function Map() {
           <Popup>Zona ~300m (oko 5 min peške)</Popup>
         </Circle>
 
-        {/* Interakcija (bonus): klik na mapu postavlja marker */}
         <ClickToAddMarker onPick={setPickedPos} />
 
         {pickedPos && (
