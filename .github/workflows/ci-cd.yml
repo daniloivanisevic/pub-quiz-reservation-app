@@ -1,13 +1,14 @@
-name: CI
+name: CI/CD
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: ["main", "develop"]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: ["main", "develop"]
 
 jobs:
   test-backend:
+    name: Backend tests (Django)
     runs-on: ubuntu-latest
 
     services:
@@ -49,6 +50,7 @@ jobs:
           DB_HOST: 127.0.0.1
           DB_PORT: 5432
 
+          # da testovi ne padnu zbog email env varijabli
           RESEND_API_KEY: "dummy"
           DEFAULT_FROM_EMAIL: "Egzibicija Pab Kviz <onboarding@resend.dev>"
         run: |
@@ -56,6 +58,7 @@ jobs:
           python manage.py test
 
   docker-build:
+    name: Build Docker images (compose)
     runs-on: ubuntu-latest
     needs: test-backend
 
@@ -63,8 +66,36 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build Docker images (compose)
+      - name: Build Docker images
         env:
           NEXT_PUBLIC_MAPTILER_KEY: "dummy"
         run: |
           docker compose build
+
+  deploy-render:
+    name: Deploy to Render (CD)
+    runs-on: ubuntu-latest
+    needs: docker-build
+
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Trigger Render deploy hooks
+        env:
+          # Ove 2 vrednosti unosiš u GitHub Secrets:
+          # Settings -> Secrets and variables -> Actions -> New repository secret
+          RENDER_BACKEND_DEPLOY_HOOK: ${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}
+          RENDER_FRONTEND_DEPLOY_HOOK: ${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$RENDER_BACKEND_DEPLOY_HOOK" ] || [ -z "$RENDER_FRONTEND_DEPLOY_HOOK" ]; then
+            echo "Missing Render deploy hook secrets. Add RENDER_BACKEND_DEPLOY_HOOK and RENDER_FRONTEND_DEPLOY_HOOK in GitHub Secrets."
+            exit 1
+          fi
+
+          echo "Trigger backend deploy..."
+          curl -fsS -X POST "$RENDER_BACKEND_DEPLOY_HOOK"
+
+          echo "Trigger frontend deploy..."
+          curl -fsS -X POST "$RENDER_FRONTEND_DEPLOY_HOOK"
+
+          echo "Deploy hooks triggered."
