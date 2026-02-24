@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { apiUrl } from "@/lib/api";
 
 import Navbar from "@/components/ui/navbar";
 import Button from "@/components/ui/button";
@@ -24,12 +25,11 @@ export default function AdminTablesPage() {
   const [capacity, setCapacity] = useState("");
 
   async function loadTables(token: string) {
-    const res = await fetch("http://127.0.0.1:8000/api/tables/", {
+    const res = await fetch(apiUrl("/api/tables/"), {
       headers: { Authorization: `Token ${token}` },
       cache: "no-store",
     });
 
-    // ako nije admin -> backend vraća 403
     if (res.status === 403) {
       router.push("/");
       return;
@@ -76,7 +76,7 @@ export default function AdminTablesPage() {
       return;
     }
 
-    const res = await fetch("http://127.0.0.1:8000/api/tables/", {
+    const res = await fetch(apiUrl("/api/tables/"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -112,7 +112,7 @@ export default function AdminTablesPage() {
       return;
     }
 
-    const res = await fetch(`http://127.0.0.1:8000/api/tables/${id}/`, {
+    const res = await fetch(apiUrl(`/api/tables/${id}/`), {
       method: "DELETE",
       headers: { Authorization: `Token ${token}` },
     });

@@ -128,7 +128,7 @@ if cors_origins:
 
 
 
-# ================= EMAIL (RESEND SMTP) =================
+#EMAIL (RESEND SMTP)
 
 RESEND_API_KEY = os.getenv("RESEND_API_KEY", "")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "onboarding@resend.dev")
