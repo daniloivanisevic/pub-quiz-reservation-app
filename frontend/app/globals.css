@@ -23,6 +23,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: underline;
 }
@@ -44,13 +45,13 @@ a:hover {
 }
 
 .navbar {
-  padding: 12px 24px;         
-  border-bottom: 1px solid #2a2a2a;   
-  background: #173127;                
+  padding: 12px 24px;
+  border-bottom: 1px solid #2a2a2a;
+  background: #173127;
 
-  display: flex;                      
-  justify-content: space-between;     
-  align-items: center;                
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navbarInner {
@@ -63,7 +64,7 @@ a:hover {
 }
 
 .navbarLogo {
-  height:55px;
+  height: 55px;
   width: auto;
 }
 
@@ -130,6 +131,7 @@ a:hover {
   color: #17372F;
   cursor: pointer;
 }
+
 .btn:hover {
   border-color: #6b6b6b;
 }
@@ -178,7 +180,7 @@ a:hover {
   padding: 14px;
 }
 
-.smallCard2:hover{
+.smallCard2:hover {
   background: #c7b17f;
 }
 
