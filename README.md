@@ -90,9 +90,9 @@ Backend: http://localhost:8000
 ## Frontend
 
 
-cd frontend
-npm install
-npm run dev
+- cd frontend
+- npm install
+- npm run dev
 
 
 Frontend: http://localhost:3000
