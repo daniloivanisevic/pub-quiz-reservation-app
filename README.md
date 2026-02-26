@@ -1,8 +1,8 @@
 # Aplikacija za rezervaciju mesta za pab kvizove
 
 Web aplikacija za rezervaciju mesta na pab kvizovima. Sistem omogućava
-pregled kviz događaja, prikaz lokacije na mapi, i rezervaciju mesta
-putem modernog web interfejsa.
+pregled kvizova, prikaz lokacije na mapi i rezervaciju mesta
+putem web interfejsa.
 
 Aplikacija se sastoji iz dva dela:
 
@@ -75,12 +75,12 @@ API za prikaz i interakciju sa korisnicima.
 ## Backend
 
 
-cd backend
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
+- cd backend
+- python -m venv venv
+- venv\Scripts\activate
+- pip install -r requirements.txt
+- python manage.py migrate
+- python manage.py runserver
 
 
 Backend: http://localhost:8000
@@ -90,9 +90,9 @@ Backend: http://localhost:8000
 ## Frontend
 
 
-cd frontend
-npm install
-npm run dev
+- cd frontend
+- npm install
+- npm run dev
 
 
 Frontend: http://localhost:3000
