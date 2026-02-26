@@ -4,7 +4,7 @@ import Navbar from "@/components/ui/navbar";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
-// ✅ tvoje komponente su default export
+
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
 import { apiUrl } from "@/lib/api";
@@ -46,7 +46,6 @@ export default function MyReservationPage() {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
   const [tables, setTables] = useState<Table[]>([]);
 
-  // EDIT STATE
   const [editingId, setEditingId] = useState<number | null>(null);
   const [newTeamName, setNewTeamName] = useState<string>("");
 

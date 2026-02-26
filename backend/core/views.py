@@ -67,7 +67,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
         quiz_id = request.data.get("quiz_id")
         party_size = request.data.get("party_size")
 
-        # robustno parsiranje party_size (može doći kao string)
+        
         try:
             party_size = int(party_size)
         except (TypeError, ValueError):
@@ -152,7 +152,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # robustno parsiranje party_size (može doći kao string)
+      
         try:
             party_size = int(party_size)
         except (TypeError, ValueError):
@@ -195,7 +195,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # Kreiranje rezervacije + zaštita od race condition (unique constraint)
+        
         try:
             reservation = Reservation.objects.create(
                 user=request.user,
@@ -211,7 +211,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # Email potvrda (ne ruši rezervaciju ako slanje padne)
+       
         try:
             to_email = (request.user.email or "").strip()
             if not to_email:

@@ -48,7 +48,7 @@ export default function ReservationClient() {
       return;
     }
 
-    // query param: ?quiz=123
+    
     const q = params.get("quiz");
     if (q) setQuizId(q);
   }, [router, params]);
@@ -62,7 +62,7 @@ export default function ReservationClient() {
         const arr = Array.isArray(data) ? data : data.results || [];
         setQuizzes(arr);
       } catch {
-        // ignore
+        
       }
     }
     loadQuizzes();

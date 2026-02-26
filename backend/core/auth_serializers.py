@@ -16,7 +16,7 @@ class RegisterSerializer(serializers.Serializer):
         if attrs["password"] != attrs["password2"]:
             raise serializers.ValidationError({"password2": "Lozinke se ne poklapaju."})
 
-        # pošto ćemo username = email, mora biti unikatan
+        
         if User.objects.filter(username=email).exists() or User.objects.filter(email=email).exists():
             raise serializers.ValidationError({"email": "Email je već u upotrebi."})
 
@@ -28,7 +28,7 @@ class RegisterSerializer(serializers.Serializer):
         password = validated_data["password"]
 
         user = User.objects.create_user(
-            username=email,   # <-- TRIK: username postaje email
+            username=email,  
             email=email,
             password=password,
         )

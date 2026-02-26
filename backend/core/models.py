@@ -52,7 +52,7 @@ class Reservation(models.Model):
 
     class Meta:
         constraints = [
-            # Dozvoljena samo jedna AKTIVNA rezervacija po stolu i kvizu
+            
             models.UniqueConstraint(
                 fields=["table", "quiz"],
                 condition=Q(status="aktivna"),

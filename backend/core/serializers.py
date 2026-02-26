@@ -24,7 +24,7 @@ class ReservationSerializer(serializers.ModelSerializer):
         model = Reservation
         fields = "__all__"
         read_only_fields = ("status", "created_at")
-        validators = []  # BITNO: gasi DRF auto UniqueConstraint validator (koji puca na PATCH bez status-a)
+        validators = []  
 
     def validate(self, data):
         """
@@ -33,25 +33,24 @@ class ReservationSerializer(serializers.ModelSerializer):
         - (quiz, table) mora biti jedinstveno za aktivne rezervacije
         """
 
-        # finalne vrednosti posle PATCH-a (ako nešto nije poslato, uzmi sa instance)
+        
         table = data.get("table") or getattr(self.instance, "table", None)
         quiz = data.get("quiz") or getattr(self.instance, "quiz", None)
         party_size = data.get("party_size") or getattr(self.instance, "party_size", None)
 
-        # status je read_only pa kod PATCH-a neće stići u data, zato uzimamo sa instance
+      
         status_value = getattr(self.instance, "status", None)
         if "status" in data:
             status_value = data.get("status")
 
-        # 1) Kapacitet stola
+        
         if table is not None and party_size is not None:
             if party_size > table.capacity:
                 raise serializers.ValidationError(
                     {"party_size": "Broj clanova prelazi dozvoljen broj ljudi za stolom"}
                 )
 
-        # 2) Unique pravilo samo za aktivne
-        # (pretpostavljam da ti je string statusa "aktivna" jer tako prikazuješ na frontu)
+        
         ACTIVE_VALUE = "aktivna"
 
         if quiz is not None and table is not None and status_value == ACTIVE_VALUE:

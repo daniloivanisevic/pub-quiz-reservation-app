@@ -50,7 +50,7 @@ export default function RegisterPage() {
             });
 
             const data = await res.json();
-          // setInfo(JSON.stringify(data));
+          
 
 
             if (!res.ok) {
