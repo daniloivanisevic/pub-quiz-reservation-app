@@ -7,7 +7,6 @@ RUN npm ci
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-
 ARG NEXT_PUBLIC_MAPTILER_KEY
 ARG NEXT_PUBLIC_API_URL
 

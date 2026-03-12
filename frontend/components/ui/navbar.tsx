@@ -65,8 +65,7 @@ export default function Navbar() {
             <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
                 <Link href="/reservation">Rezervacija</Link>
                 <Link href="/myreservation">Moje rezervacije</Link>
-
-                
+               
                 {isAdmin && (
                     <Link href="/admin_tables/">Upravljanje stolovima</Link>
                 )}

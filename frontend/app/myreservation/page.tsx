@@ -136,7 +136,7 @@ export default function MyReservationPage() {
     try {
       setError(null);
 
-      const res = await fetch(apiUrl(`"/api/reservations/${reservationId}/`), {
+      const res = await fetch(apiUrl(`/api/reservations/${reservationId}/`), {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -175,7 +175,7 @@ export default function MyReservationPage() {
     try {
       setError(null);
 
-      const res = await fetch(apiUrl(`"/api/reservations/${reservationId}/cancel/`), {
+      const res = await fetch(apiUrl(`/api/reservations/${reservationId}/cancel/`), {
         method: "POST",
         headers: { Authorization: `Token ${token}` },
       });
