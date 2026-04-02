@@ -17,7 +17,7 @@ Aplikacija se sastoji iz dva dela:
 
 Frontend (Next.js)
 
-Backend (Django REST API)\
+Backend (Django REST API)
 
 PostgreSQL (Docker container)
 
@@ -140,6 +140,8 @@ Servisi:
 ### feature/emails
 
 -   Implementacija email notifikacija
+
+
 
 ------------------------------------------------------------------------
 
